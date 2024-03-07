@@ -1,8 +1,8 @@
-###  DATE: 
+###  DATE: 05.03.2024
 
-###  NAME: 
-###  ROLL NO :
-###  DEPARTMENT: 
+###  NAME: Kanagavel.R
+###  ROLL NO :212223040085
+###  DEPARTMENT: CSE
 
 
 # EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR
@@ -119,14 +119,55 @@ The diagram below shows how the GPIO pins are connected to the 16 interrupt line
 
 ## STM 32 CUBE PROGRAM :
 
+```
+#include "main.h"
+#include "stdio.h"
 
+#if defined (_ICCARM) || defined (_ARMCC_VERSION)
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#elif defined(GNUC)
+
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+		if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4)==0)
+		{
+			printf("obstacle found\n");
+			HAL_Delay(500);
+		}
+		else
+		{
+			printf("obstacle not found\n");
+			HAL_Delay(500);
+		}
+}
+
+PUTCHAR_PROTOTYPE
+{
+
+  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, 0xFFFF);
+
+  return ch;
+}
+```
 
 ## Output screen shots of serial port utility   :
- 
+ ![WhatsApp Image 2024-03-07 at 11 56 36 AM](https://github.com/kanagavel7/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/162578954/303a4175-88c8-4ae9-8943-bd103c0c2c66)
+
  
  ## Circuit board :
  
+ ![WhatsApp Image 2024-03-07 at 11 56 41 AM](https://github.com/kanagavel7/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/162578954/48f77b53-b3bc-42f9-9a7a-26b2b05bf641)
+
+ ## Output screen shots of serial port utility   :
  
+ ![WhatsApp Image 2024-03-07 at 11 56 41 AM (1)](https://github.com/kanagavel7/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/162578954/7c6ab59e-b074-46a1-8f6b-ce50b9928ba3)
+
+ ## Circuit board :
+ ![Screenshot 2024-03-07 174343](https://github.com/kanagavel7/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/162578954/2fb86a9e-09a7-4443-84fe-d21c666767e5)
+
  
 ## Result :
 Interfacing a  IR SENSOR and interrupt is generated using external interrupt mode , visualized on serial port 
